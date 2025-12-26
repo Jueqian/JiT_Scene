@@ -1,0 +1,22 @@
+# configs/model/vae.yaml 示例
+
+_target_: src.models.vae.VAEPointcloudCompressor # 指向您实现的类
+
+model:
+  vfe:
+    output_channels: 32  # VFE 输出 BEV 图的特征通道数
+    # ... 其他 VFE 参数
+  
+  vae:
+    latent_dim: 128     # 潜在空间 Z 的维度
+    # ... 其他 VAE 参数
+    
+  unet:
+    sample_size: 64         # 输入 BEV 图的尺寸 (H=W=64)
+    latent_feature_channels: 256 # U-Net 最深层特征的通道数
+    layers_per_block: 2
+    block_out_channels: [64, 128, 256] # 定义 Downsampling 块的输出通道
+    down_block_types: ["DownBlock2D", "DownBlock2D", "DownBlock2D"]
+    # ... 其他 UNet 参数
+
+    
